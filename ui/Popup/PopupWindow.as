@@ -1,4 +1,4 @@
-package ui.Popup 
+﻿package ui.Popup 
 {
 	import core.utils.DisplayUtility;
 	import core.utils.LinkageUtility;
@@ -8,6 +8,13 @@ package ui.Popup
 	import ui.button.LinkageButton;
 	import ui.components.UIComponents;
 	import utils.PopupManager;
+	test1
+	test2
+	test3
+	test4
+	test5
+	test6
+	
 	/**
 	 * ポップアップWindowの背景とタイトルとボタンをセットしたクラス
 	 * 基本継承して使うこと
