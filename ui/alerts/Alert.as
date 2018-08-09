@@ -4,6 +4,8 @@ package ui.alerts
 	import core.utils.LinkageUtility;
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
+	import flash.geom.Rectangle2;
+	import flash.geom.Rectangle3;
 	import ui.bitmap.BitmapScale9Grid;
 	
 	/**
@@ -103,6 +105,41 @@ package ui.alerts
 			alert.showPopup();
 			return alert;
 		}
+		
+		
+		/**
+		 * Alert のボタンラベルを自由に変えられるshowメソッドの改良版
+		 *
+		 * @param	text	Alert コントロールに表示されるテキストストリングです。このテキストは警告ダイアログボックスの中央に配置されます。
+		 * @param	title	タイトルバーに表示されるテキストストリングです。このテキストは左揃えされます。
+		 * @param	flags	Alert コントロールに配置するボタンを指定します。 有効な値は、Alert.OK、Alert.CANCELです。 デフォルト値は Alert.OK です。 複数のボタンを表示する場合は、ビット単位の OR 演算子を使用します。 例えば、(Alert.OK | Alert.CANCEL) を渡すと「ＯＫ」「キャンセル」ボタンが表示されます。「キャンセル」「ＯＫ」の順でボタンを表示する場合は ~(Alert.OK | Alert.CANCEL) と指定してください。
+		 * @param	closeHandler	Alert コントロール上の任意のボタンが押されたときに呼び出されるイベントハンドラーです。 このハンドラーに渡されるイベントオブジェクトは、CloseEvent のインスタンスです。このオブジェクトの detail プロパティには、値 Alert.OK、Alert.CANCELが含まれます。
+		 * @return	Alert コントロールへの参照です。
+		 * @langversion	3.0
+		 * @playerversion	Flash 9
+		 * @playerversion	AIR 1.1
+		 * @productversion	Flex 3
+		 */
+		public static function showOriginalAlert(text:String = "", title:String = "", flags:int = 4, closeHandler:Function = null, okLabel:String = "", cancelLabel:String = ""):Alert
+		{	
+			var alert:Alert = new Alert();
+			alert.titleLabel.text = title;
+			alert.detailLabel.text = text;
+			
+			alert.callBackHandler = closeHandler;
+			alert.setBtn(flags);
+			alert.invalidateDisplayList();
+			
+			if (okLabel.length && cancelLabel.length)
+			{
+				alert.okBtn.setLabelLinkage(okLabel);
+				alert.cancelBtn.setLabelLinkage(cancelLabel);
+			}
+			
+			alert.showPopup();
+			return alert;
+		}
+		
 		
 		//-----------------------------------------------------
 		//コンストラクタ
